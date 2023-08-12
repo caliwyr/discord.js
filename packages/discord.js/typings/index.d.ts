@@ -1044,7 +1044,7 @@ export class ClientUser extends User {
   public verified: boolean;
   public edit(options: ClientUserEditOptions): Promise<this>;
   public setActivity(options?: ActivityOptions): ClientPresence;
-  public setActivity(name: string, options?: ActivityOptions): ClientPresence;
+  public setActivity(name: string, options?: Omit<ActivityOptions, 'name'>): ClientPresence;
   public setAFK(afk?: boolean, shardId?: number | number[]): ClientPresence;
   public setAvatar(avatar: BufferResolvable | Base64Resolvable | null): Promise<this>;
   public setPresence(data: PresenceData): ClientPresence;
@@ -4322,9 +4322,10 @@ export interface WebhookFields extends PartialWebhookFields {
 export type ActivitiesOptions = Omit<ActivityOptions, 'shardId'>;
 
 export interface ActivityOptions {
-  name?: string;
+  name: string;
+  state?: string;
   url?: string;
-  type?: Exclude<ActivityType, ActivityType.Custom>;
+  type?: ActivityType;
   shardId?: number | readonly number[];
 }
 
