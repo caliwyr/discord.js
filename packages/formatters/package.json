@@ -1,6 +1,6 @@
 {
 	"name": "@discordjs/formatters",
-	"version": "0.3.1",
+	"version": "0.3.2",
 	"description": "A set of functions to format strings for Discord.",
 	"scripts": {
 		"test": "vitest run",
@@ -46,7 +46,7 @@
 	},
 	"homepage": "https://discord.js.org",
 	"dependencies": {
-		"discord-api-types": "^0.37.50"
+		"discord-api-types": "0.37.50"
 	},
 	"devDependencies": {
 		"@favware/cliff-jumper": "^2.1.1",

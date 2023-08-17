@@ -1,6 +1,6 @@
 {
 	"name": "@discordjs/proxy",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Tools for running an HTTP proxy for Discord's API",
 	"scripts": {
 		"test": "vitest run",
@@ -59,7 +59,7 @@
 		"@discordjs/rest": "workspace:^",
 		"@discordjs/util": "workspace:^",
 		"tslib": "^2.6.1",
-		"undici": "^5.23.0"
+		"undici": "5.22.1"
 	},
 	"devDependencies": {
 		"@favware/cliff-jumper": "^2.1.1",
