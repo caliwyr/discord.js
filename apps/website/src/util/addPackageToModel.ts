@@ -1,20 +1,9 @@
-import type { ApiModel, ApiPackage } from '@microsoft/api-extractor-model';
-import { ApiItem } from '@microsoft/api-extractor-model';
-import { TSDocConfiguration } from '@microsoft/tsdoc';
-import { TSDocConfigFile } from '@microsoft/tsdoc-config';
+import { ApiPackage } from '@discordjs/api-extractor-model';
+import type { ApiModel } from '@discordjs/api-extractor-model';
 
-export function addPackageToModel(model: ApiModel, data: any) {
-	const tsdocConfiguration = new TSDocConfiguration();
-	const tsdocConfigFile = TSDocConfigFile.loadFromObject(data.metadata.tsdocConfig);
-	tsdocConfigFile.configureParser(tsdocConfiguration);
+export const addPackageToModel = (model: ApiModel, data: any) => {
+	const apiPackage = ApiPackage.loadFromJson(data);
 
-	const apiPackage = ApiItem.deserialize(data, {
-		apiJsonFilename: '',
-		toolPackage: data.metadata.toolPackage,
-		toolVersion: data.metadata.toolVersion,
-		versionToDeserialize: data.metadata.schemaVersion,
-		tsdocConfiguration,
-	}) as ApiPackage;
 	model.addMember(apiPackage);
 	return model;
-}
+};

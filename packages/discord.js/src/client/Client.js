@@ -239,7 +239,7 @@ class Client extends BaseClient {
    * @returns {boolean}
    */
   isReady() {
-    return this.ws.status === Status.Ready;
+    return !this.ws.destroyed && this.ws.status === Status.Ready;
   }
 
   /**
@@ -253,23 +253,6 @@ class Client extends BaseClient {
     await this.ws.destroy();
     this.token = null;
     this.rest.setToken(null);
-  }
-
-  /**
-   * Options used for deleting a webhook.
-   * @typedef {Object} WebhookDeleteOptions
-   * @property {string} [token] Token of the webhook
-   * @property {string} [reason] The reason for deleting the webhook
-   */
-
-  /**
-   * Deletes a webhook.
-   * @param {Snowflake} id The webhook's id
-   * @param {WebhookDeleteOptions} [options] Options for deleting the webhook
-   * @returns {Promise<void>}
-   */
-  async deleteWebhook(id, { token, reason } = {}) {
-    await this.rest.delete(Routes.webhook(id, token), { auth: !token, reason });
   }
 
   /**
@@ -369,7 +352,7 @@ class Client extends BaseClient {
    */
   async fetchStickerPacks() {
     const data = await this.rest.get(Routes.stickerPacks());
-    return new Collection(data.sticker_packs.map(p => [p.id, new StickerPack(this, p)]));
+    return new Collection(data.sticker_packs.map(stickerPack => [stickerPack.id, new StickerPack(this, stickerPack)]));
   }
 
   /**
